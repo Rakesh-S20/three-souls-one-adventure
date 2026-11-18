@@ -1,0 +1,758 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Souls, One Adventure ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
+}
+
+html { scroll-behavior:smooth; }
+
+body {
+ font-family:Poppins,sans-serif;
+ color:#684c66;
+ text-align:center;
+ overflow-x:hidden;
+ background:#fceaf3;
+}
+
+/* BACKGROUND IMAGE */
+
+body::before {
+ content:"";
+ position:fixed;
+ inset:0;
+ z-index:-2;
+ background:
+ linear-gradient(135deg,#ffe7f1c9,#eee5ffc9,#fff1f5c9),
+ url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1920");
+ background-size:cover;
+ background-position:center;
+}
+
+/* WELCOME SCREEN */
+
+#welcome {
+ min-height:100vh;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ padding:25px;
+ background:linear-gradient(#fff0f5a8,#eee5ff99);
+ animation:fadeIn 2s ease;
+}
+
+.welcome-heart {
+ font-size:85px;
+ animation:heartbeat 1.5s infinite;
+}
+
+#welcome h1 {
+ font-family:'Playfair Display',serif;
+ font-size:clamp(42px,9vw,72px);
+ color:#b05c91;
+ margin:20px 0;
+}
+
+#welcome p {
+ line-height:2;
+ margin:10px;
+}
+
+.names {
+ letter-spacing:3px;
+ color:#b05c91;
+ font-size:16px;
+ margin:15px;
+}
+
+button {
+ border:none;
+ border-radius:35px;
+ padding:14px 28px;
+ margin:10px;
+ background:linear-gradient(120deg,#e78ab7,#ac7bd3);
+ color:white;
+ font-family:inherit;
+ font-size:14px;
+ cursor:pointer;
+ transition:.4s;
+ box-shadow:0 5px 20px #b05c9140;
+}
+
+button:hover {
+ transform:translateY(-5px) scale(1.04);
+ box-shadow:0 10px 25px #b05c9160;
+}
+
+.open-btn {
+ font-size:16px;
+ padding:17px 35px;
+ animation:glow 2s infinite;
+}
+
+/* MAIN STORY - HIDDEN INITIALLY */
+
+#story {
+ display:none;
+ max-width:760px;
+ margin:auto;
+ padding:20px;
+ animation:fadeIn 1.5s ease;
+}
+
+.nav {
+ position:sticky;
+ top:0;
+ z-index:5;
+ padding:13px 5px;
+ background:#fff0f3eF;
+ backdrop-filter:blur(12px);
+ border-radius:0 0 20px 20px;
+}
+
+.nav a {
+ color:#9e598c;
+ text-decoration:none;
+ font-size:12px;
+ margin:0 8px;
+}
+
+section {
+ scroll-margin-top:75px;
+}
+
+.hero {
+ min-height:65vh;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+}
+
+h1,h2 {
+ font-family:'Playfair Display',serif;
+}
+
+h1 {
+ font-size:clamp(40px,9vw,65px);
+ color:#b05c91;
+}
+
+h2 {
+ font-size:30px;
+ color:#b05c91;
+ margin:15px 0;
+}
+
+p {
+ font-size:15px;
+ line-height:2;
+ margin:12px 0;
+}
+
+.heart {
+ font-size:65px;
+ animation:heartbeat 1.4s infinite;
+}
+
+.card {
+ background:#ffffffdf;
+ padding:30px 24px;
+ margin:28px 0;
+ border:1px solid white;
+ border-radius:25px;
+ box-shadow:0 12px 35px #9d6d9b25;
+ backdrop-filter:blur(8px);
+ opacity:0;
+ transform:translateY(35px);
+ transition:opacity .9s ease,transform .9s ease;
+}
+
+.card.show {
+ opacity:1;
+ transform:translateY(0);
+}
+
+.highlight {
+ color:#c05091;
+ font-weight:600;
+}
+
+.yue {
+ background:linear-gradient(145deg,#f1e5ffed,#ffffffed);
+}
+
+.yue h2 {
+ color:#9666bd;
+}
+
+.yue .highlight {
+ color:#9160ba;
+}
+
+.proposal {
+ background:linear-gradient(150deg,#fff0f7ed,#f2e6ffed);
+}
+
+.proposal h1 {
+ font-size:clamp(40px,8vw,57px);
+}
+
+.hidden {
+ display:none;
+}
+
+/* DECORATIVE BACKGROUND IMAGES */
+
+.image-divider {
+ height:190px;
+ margin:25px 0;
+ border-radius:25px;
+ background-size:cover;
+ background-position:center;
+ box-shadow:0 8px 25px #9d6d9b30;
+}
+
+.flower-image {
+ background-image:
+ linear-gradient(#00000015,#00000015),
+ url("https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=1200");
+}
+
+.rose-image {
+ background-image:
+ linear-gradient(#00000015,#00000015),
+ url("https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=1200");
+}
+
+/* ANIMATIONS */
+
+@keyframes heartbeat {
+ 50% { transform:scale(1.2); }
+}
+
+@keyframes fadeIn {
+ from { opacity:0; }
+ to { opacity:1; }
+}
+
+@keyframes glow {
+ 50% { box-shadow:0 0 25px #e78ab7; }
+}
+
+@keyframes float {
+ 0%,100% { transform:translateY(0); }
+ 50% { transform:translateY(-15px); }
+}
+
+@keyframes fall {
+ to {
+  transform:translateY(110vh) rotate(600deg);
+  opacity:0;
+ }
+}
+
+.petal {
+ position:fixed;
+ top:-35px;
+ z-index:10;
+ pointer-events:none;
+ animation:fall linear forwards;
+}
+
+.floating-heart {
+ position:fixed;
+ bottom:-30px;
+ pointer-events:none;
+ z-index:1;
+ animation:floatUp linear forwards;
+}
+
+@keyframes floatUp {
+ to {
+  transform:translateY(-110vh) rotate(360deg);
+  opacity:0;
+ }
+}
+
+/* CELEBRATION */
+
+#celebrate {
+ display:none;
+ position:fixed;
+ inset:0;
+ background:linear-gradient(135deg,#fff0f5f5,#eee5fff5);
+ z-index:20;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ padding:25px;
+ animation:fadeIn 1s ease;
+}
+
+#celebrate h1 {
+ font-size:clamp(35px,8vw,55px);
+}
+
+footer {
+ padding:35px;
+ font-size:12px;
+}
+
+@media(max-width:500px) {
+ .nav a {
+  font-size:10px;
+  margin:0 4px;
+ }
+ .card { padding:25px 18px; }
+ h2 { font-size:26px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- WELCOME SCREEN: ONLY THIS IS VISIBLE INITIALLY -->
+
+<div id="welcome">
+
+ <div class="welcome-heart">💗</div>
+
+ <p>A LITTLE SOMETHING FROM THE HEART</p>
+
+ <h1>Three Souls,<br>One Adventure.</h1>
+
+ <div class="names">
+ ROCKSTARDEVIL × THEEVIRTUOSO
+ </div>
+
+ <p>
+ Two special people.<br>
+ Two beautiful bonds.<br>
+ One unforgettable adventure.
+ </p>
+
+ <button class="open-btn" onclick="openStory()">
+ Open Your Surprise 💌
+ </button>
+
+ <p style="font-size:12px;color:#b05c91">
+ Made with love, just for you ❤️
+ </p>
+
+</div>
+
+
+<!-- ALL PERSONAL MESSAGES ARE HIDDEN UNTIL CLICK -->
+
+<div id="story">
+
+ <div class="nav">
+  <a href="#apology">Apology</a>
+  <a href="#love">My Feelings</a>
+  <a href="#proposal">Proposal 💍</a>
+  <a href="#yue">Yue 💜</a>
+ </div>
+
+ <section class="hero">
+  <div class="heart">💗</div>
+  <h1>Our Little Story</h1>
+  <p>Some words come straight from the heart.</p>
+  <p class="names">ROCKSTARDEVIL</p>
+ </section>
+
+ <div class="image-divider flower-image"></div>
+
+ <section id="apology" class="card">
+  <div style="font-size:45px">🌷</div>
+  <h2>Dear TheeVirtuoso</h2>
+
+  <p>
+  First of all, I'm sorry for not complimenting
+  your new outfit immediately.
+  </p>
+
+  <p>
+  I understand now that it wasn't simply about
+  getting a compliment. It's about someone noticing
+  you without having to ask.
+  </p>
+
+  <p>
+  A compliment that comes naturally feels different.
+  It feels genuine, thoughtful and special.
+  </p>
+
+  <p>
+  You shouldn't have to ask someone to notice
+  the little things that make you happy.
+  </p>
+
+  <p class="highlight">
+  I'm sorry I made you feel unnoticed. ❤️
+  </p>
+ </section>
+
+ <section class="card">
+  <div style="font-size:45px">👑</div>
+  <h2>One thing I must say...</h2>
+
+  <p>
+  TheeVirtuoso, you looked absolutely gorgeous
+  in your new outfit!
+  </p>
+
+  <p>
+  The outfit was beautiful, and the person wearing
+  it made it even more special.
+  </p>
+
+  <p class="highlight">
+  You deserve appreciation without having to ask for it.
+  </p>
+ </section>
+
+ <div class="image-divider rose-image"></div>
+
+ <section id="love" class="card">
+  <div style="font-size:45px">💕</div>
+  <h2>Something from my heart</h2>
+
+  <p>
+  Somewhere between our adventures, conversations,
+  battles and little moments in Where Winds Meet,
+  you became someone special to me.
+  </p>
+
+  <p>
+  I honestly didn't expect to develop feelings
+  for someone through a game, but here I am.
+  </p>
+
+  <p>
+  Seeing you online, spending time together
+  and sharing our adventures makes this game
+  feel more special.
+  </p>
+
+  <p class="highlight">
+  The truth is... I like you, TheeVirtuoso. ❤️
+  </p>
+ </section>
+
+ <section id="proposal" class="card proposal">
+  <div style="font-size:65px">💍</div>
+
+  <p>AN IMPORTANT QUESTION FROM ROCKSTARDEVIL</p>
+
+  <h1>Will You Marry Me?</h1>
+
+  <div style="font-size:40px">🌹✨🌹</div>
+
+  <p>Dear TheeVirtuoso,</p>
+
+
+  <p>
+  Will you be my partner in this world of martial arts,
+  adventures and endless journeys?
+  </p>
+
+  <p>
+  Let's explore every corner, fight every boss,
+  discover hidden secrets and create beautiful
+  memories together.
+  </p>
+
+  <p>
+  I can't promise every adventure will be easy,
+  but I would love to have you beside me.
+  </p>
+
+  <h2>So, what do you say? 🥺</h2>
+
+  <button onclick="yes()">YES! 💍❤️</button>
+
+  <button onclick="maybe()">I need a moment 🥺</button>
+
+  <div id="maybe" class="hidden">
+   <p class="highlight">Take your time, Virtuoso. ❤️</p>
+   <p>No pressure. Your happiness matters to me.</p>
+  </div>
+ </section>
+
+ <div class="image-divider flower-image"></div>
+
+ <section id="yue" class="card yue">
+  <div style="font-size:60px">💜</div>
+
+  <p>A SPECIAL LETTER FOR A SPECIAL FRIEND</p>
+
+  <h2>Dear 夜绯月 (Yue)</h2>
+
+  <p>
+  First of all, I'm sorry if I frustrated you
+  while you were trying to explain things to me.
+  </p>
+
+  <p>
+  And thank you for taking the time to guide me
+  and help me understand things in a better way.
+  </p>
+
+  <p>
+  I know you scolded me because you wanted me
+  to understand something important.
+  And honestly, I appreciate that.
+  </p>
+
+  <p>
+  As my close friend, you have every right to
+  correct me, guide me and even scold me
+  whenever I'm being silly or making mistakes.
+  </p>
+
+  <p class="highlight">
+  So please, don't feel guilty about scolding me.
+  Don't overthink anything you said.
+  </p>
+
+  <p>
+  I'd rather have a friend who tells me when I'm wrong
+  than someone who agrees with everything I do.
+  </p>
+
+  <p>
+  Thank you for guiding me in the right direction.
+  Thank you for your honesty, your patience
+  and for putting up with my nonsense.
+  </p>
+
+  <p>
+  I might not always express it, but I genuinely
+  value you and our friendship.
+  </p>
+
+  <p>
+  You're not just a friend I met in a game.
+  You're someone I truly consider my best friend.
+  </p>
+
+  <div style="font-size:45px">🫂💜</div>
+
+  <h2 class="highlight">Best Friends Always</h2>
+
+  <p>
+  No matter what happens, Rockstardevil
+  will always be your best friend.
+  </p>
+
+  <p>
+  Thank you for being an amazing best friend, Yue.
+  I'm lucky to have you.
+  </p>
+
+  <p class="highlight">
+  With lots of love and appreciation,<br>
+  Your best friend, Rockstardevil 💜
+  </p>
+ </section>
+
+ <section class="card">
+  <h2>Three Souls, One Adventure</h2>
+
+  <p>
+  TheeVirtuoso, someone who makes my heart smile. 💗
+  </p>
+
+  <p>
+  Yue, someone who helps me become a better person. 💜
+  </p>
+
+  <p>
+  Two different bonds, both special in their own way.
+  </p>
+
+  <div style="font-size:45px">🌸❤️💜🌸</div>
+
+  <p class="highlight">
+  Thank you both for being part of my journey.
+  </p>
+ </section>
+
+ <footer>
+  Made with love, friendship and appreciation.
+  <br><br>
+  ROCKSTARDEVIL ❤️ THEEVIRTUOSO
+  <br>
+  ROCKSTARDEVIL 💜 夜绯月
+  <br><br>
+  Our adventure continues... ✨
+ </footer>
+
+</div>
+
+
+<!-- PROPOSAL CELEBRATION -->
+
+<div id="celebrate">
+
+ <div style="font-size:75px">💍</div>
+
+ <h1>OUR ADVENTURE BEGINS! ❤️</h1>
+
+ <p>Rockstardevil × TheeVirtuoso</p>
+
+ <p>Two hearts, countless adventures. 🌸</p>
+
+ <div style="font-size:50px">🥂💕🌹</div>
+
+ <button onclick="closeCelebrate()">
+ Back to our story
+ </button>
+
+</div>
+
+
+<script>
+
+// OPEN THE STORY ONLY AFTER CLICKING
+
+function openStory() {
+
+ document.getElementById("welcome").style.display="none";
+
+ const story=document.getElementById("story");
+
+ story.style.display="block";
+
+ window.scrollTo({top:0,behavior:"smooth"});
+
+ startAnimations();
+
+ setTimeout(revealCards,200);
+
+}
+
+// REVEAL CARDS WITH ANIMATION
+
+function revealCards() {
+
+ const cards=document.querySelectorAll(".card");
+
+ const observer=new IntersectionObserver(entries=>{
+
+  entries.forEach(entry=>{
+
+   if(entry.isIntersecting) {
+    entry.target.classList.add("show");
+   }
+
+  });
+
+ },{threshold:0.12});
+
+ cards.forEach(card=>observer.observe(card));
+
+}
+
+// NAVIGATION
+
+function go(id) {
+ document.getElementById(id).scrollIntoView({
+  behavior:"smooth"
+ });
+}
+
+// PROPOSAL YES
+
+function yes() {
+
+ document.getElementById("celebrate").style.display="flex";
+
+ for(let i=0;i<100;i++) {
+  setTimeout(petal,i*45);
+ }
+
+}
+
+// MAYBE BUTTON
+
+function maybe() {
+ document.getElementById("maybe").classList.remove("hidden");
+}
+
+// CLOSE CELEBRATION
+
+function closeCelebrate() {
+ document.getElementById("celebrate").style.display="none";
+}
+
+// FALLING PETALS
+
+function petal() {
+
+ const p=document.createElement("div");
+
+ p.className="petal";
+
+ p.textContent=["🌸","💗","💕","✨","🌹"][Math.floor(Math.random()*5)];
+
+ p.style.left=Math.random()*100+"vw";
+
+ p.style.fontSize=(16+Math.random()*25)+"px";
+
+ p.style.animationDuration=(3+Math.random()*5)+"s";
+
+ document.body.appendChild(p);
+
+ setTimeout(()=>p.remove(),8500);
+
+}
+
+// FLOATING HEARTS
+
+function floatingHeart() {
+
+ const h=document.createElement("div");
+
+ h.className="floating-heart";
+
+ h.textContent=["💗","💕","💜","✨"][Math.floor(Math.random()*4)];
+
+ h.style.left=Math.random()*100+"vw";
+
+ h.style.fontSize=(15+Math.random()*20)+"px";
+
+ h.style.animationDuration=(5+Math.random()*5)+"s";
+
+ document.body.appendChild(h);
+
+ setTimeout(()=>h.remove(),10000);
+
+}
+
+// START BACKGROUND ANIMATIONS AFTER OPENING
+
+function startAnimations() {
+
+ setInterval(petal,1100);
+
+ setInterval(floatingHeart,1800);
+
+}
+
+</script>
+
+</body>
+</html>
